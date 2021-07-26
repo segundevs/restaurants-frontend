@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { StyledButton } from '../../components/Button';
-import { StyledForm, FormGroup, InputField, SelectField } from './UploadForm.style';
+import { StyledForm, FormGroup, InputField } from './UploadForm.style';
+import { useData } from '../../contexts/DataContext';
 
 
 
 
 const UploadForm = () => {
+  const {addRestaurant} = useData();
+
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
-  const [services, setServices] = useState('Regular');
+  // const [services, setServices] = useState('Regular');
   const [images, setImages] = useState([]);
   const [error, setError] = useState(null);
 
@@ -17,7 +20,7 @@ const UploadForm = () => {
     name,
     location,
     description,
-    services,
+    // services,
     images,
     error
   }
@@ -27,8 +30,8 @@ const UploadForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submitting');
-    console.log(initialData)
+    addRestaurant(initialData);
+    console.log(initialData);
     
   }
 
@@ -60,13 +63,13 @@ const UploadForm = () => {
       <label>Description</label>
       <InputField type="text" onChange={(e) => setDescription(e.target.value)}/>
       </FormGroup>
-      <FormGroup>
+      {/* <FormGroup>
       <label>Services</label>
       <SelectField onChange={(e) => setServices(e.target.value)}>
         <option>Regular</option>
         <option>VIP</option>
       </SelectField>
-      </FormGroup>
+      </FormGroup> */}
       <FormGroup>
       <label>Images</label>
       <InputField type="file" onChange={changeHandler}/>
