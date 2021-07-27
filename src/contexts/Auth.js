@@ -8,12 +8,12 @@ export const useAuth = () => {
 }
 
 const AuthContextProvider = ({children}) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
 
-
+  //Register a new user
   const registerUser = async (username, email, password) => {
     try {
       setLoading(true)
@@ -22,33 +22,29 @@ const AuthContextProvider = ({children}) => {
         email: email,
         password: password
       })
-
-      setLoading(false)
       setUser(res.data)
+      setLoading(false)
       
     } catch (err) {
       setError(err)
+      setLoading(false)
     }
   }
 
-
+  //Login a user
   const loginUser = async(email, password) => {
     try {
-      // setLoading(true)
+      setLoading(true)
       const res = await axios.post('http://localhost:1337/auth/local', {
         identifier: email,
         password: password
-      }
-      // , {headers: {
-      //   Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Nywia…1MTZ9.hteX2kckuoQkBgbAHRPbGM0-9IpF_ONXKyFyQ81Huuo'
-      // }}
-      )
-      
-      // setLoading(false)
-      setUser(res.data.user)
+      })
+      setUser(res.data)
+      setLoading(false)
       
     } catch (err) {
-      setError(err)  
+      setError(err)
+      setLoading(false)  
     }
   }
 
@@ -61,7 +57,7 @@ const AuthContextProvider = ({children}) => {
     registerUser,
     loginUser
   }
-
+  
   return (
     <AuthContext.Provider value={value}>
       {children}
