@@ -18,6 +18,7 @@ const DataContextProvider = ({children}) => {
       getRestaurants()
   }, []);
 
+  //Get all restaurants
   const getRestaurants = async()=>{
     setLoading(true)
      try{
@@ -31,6 +32,9 @@ const DataContextProvider = ({children}) => {
      }
   }
 
+  
+
+  //Add a restaurant
   const addRestaurant = (data) => {
     const res = JSON.stringify(data)
     setLoading(true)
@@ -49,7 +53,7 @@ const values = {
   restaurants,
   error,
   getRestaurants,
-  addRestaurant,
+  addRestaurant
 }
 
 
