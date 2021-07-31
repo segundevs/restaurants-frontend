@@ -1,22 +1,31 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import {StyledForm, FormGroup, InputField} from '../UploadForm/UploadForm.style';
 import {StyledButton} from '../../components/Button';
 import { useAuth } from '../../contexts/Auth';
 
-const Login = () => {
+import { ImageContainer, Image } from '../WelcomePage/WelcomePage.style';
+import logo from '../../img/eating-together.svg';
 
-  const {loginUser, user} = useAuth();
+const Login = () => {
+  const history = useHistory();
+
+  const {loginUser, loading} = useAuth();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    loginUser(email, password);
-    console.log(user)
+    await loginUser(email, password);
+    history.push('/home'); 
   }
 
   return (
+    <>
+    <ImageContainer>
+        <Image src={logo}/>
+    </ImageContainer>
     <StyledForm onSubmit={handleSubmit}>
       <FormGroup>
       <label>Email</label>
@@ -26,8 +35,9 @@ const Login = () => {
       <label>Password</label>
       <InputField type="password" placeholder="Enter your password" onChange={(e) => setPassword(e.target.value)}/>
       </FormGroup>
-      <StyledButton mt="30px" ht="35px" wt="100%">Login</StyledButton>
+      <StyledButton mt="30px" ht="35px" wt="100%">{loading ? 'Processing' : 'Login'}</StyledButton>
     </StyledForm>
+    </>
   )
 }
 
