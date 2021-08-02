@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 
-export const StyledSearchBar = styled.input`
-  display: hidden;
-
-  @media only screen and (max-width: 768px){
-    width: 76%;
+const StyledSearchBar = styled.input`
+    width: 100%;
     display: block;
     margin: 8px auto;
     border-radius: 5px;
@@ -13,5 +10,12 @@ export const StyledSearchBar = styled.input`
     border: 1px solid #ffffff;
     background-color: transparent;
     color: #ffffff;
-  }
 `
+
+const SearchBar = () => {
+  return (
+    <StyledSearchBar type="text" placeholder="Search restaurants" />
+  )
+}
+
+export default SearchBar

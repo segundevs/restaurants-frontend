@@ -1,20 +1,26 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+      
+  }
+
   body {
-    display: hidden;
-    background-color: yellow;
-    font-family: 'Quicksand', sans-serif;
+    background-color: #1F1F1F;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
 
     @media only screen and (max-width: 768px){
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      background-color: #1F1F1F;
-      color: #FFFFFF;
-      overflow-x: hidden;
       width: 100%;
       height: 100%;
     }
+  }
+
+  .container {
+    max-width: 80%;
+    margin: 40px auto;
   }
 `
