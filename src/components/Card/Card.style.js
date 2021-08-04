@@ -1,8 +1,18 @@
 import styled from 'styled-components';
 
-
+export const Container = styled.div`
+margin: 3rem auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 5rem;
+`
 
 export const StyledContainer = styled.div`
+  /* width: 20%;
+  display: flex;
+  flex-wrap: wrap; */
+
+
   @media only screen and (max-width: 768px){
     display: flex;
     padding: 5px 10px;
@@ -14,6 +24,8 @@ export const StyledContainer = styled.div`
 `
 
 export const StyledImage = styled.img`
+width: 100%;
+margin: 0 auto;
   @media only screen and (max-width: 768px){
     width: 120px;
     margin: 15px;

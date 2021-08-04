@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledContainer, StyledDescription, StyledDetails, StyledImage, StyledLocation, StyledName } from './Card.style';
+import { Container, StyledContainer, StyledDescription, StyledDetails, StyledImage, StyledLocation, StyledName } from './Card.style';
 import {StyledButton} from '../Button';
 import Loading from '../Loading';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Card = ({data, loading, error}) => {
   const ApiUrl = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`
   return (
-    <div>
+    <Container>
       {loading && <Loading />}
       {error && <h4>Something went wrong...</h4>}
       {/* {data && console.log(data)} */}
@@ -24,7 +24,7 @@ const Card = ({data, loading, error}) => {
           </StyledDetails>
         </StyledContainer>
       ))}
-      </div>
+      </Container>
   )
 }
 
