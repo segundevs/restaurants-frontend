@@ -18,7 +18,7 @@ const Login = () => {
   const handleSubmit = async(e) => {
     e.preventDefault()
     await loginUser(email, password);
-    history.push('/home'); 
+    history.push('/profile'); 
   }
 
   return (

@@ -1,16 +1,23 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-margin: 3rem auto;
+  margin: 1rem auto;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 5rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 2rem;
+
+  @media only screen and (max-width: 768px){
+  margin: 0.5rem auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 1rem;
+  }
+
 `
 
 export const StyledContainer = styled.div`
-  /* width: 20%;
   display: flex;
-  flex-wrap: wrap; */
+  flex-direction: column;
 
 
   @media only screen and (max-width: 768px){

@@ -2,27 +2,28 @@ import React, { useState } from 'react';
 import { StyledButton } from '../../components/Button';
 import { StyledForm, FormGroup, InputField } from './UploadForm.style';
 import { useData } from '../../contexts/DataContext';
+import { useAuth } from '../../contexts/Auth';
 
 
 
 
 const UploadForm = () => {
-  const {addRestaurant} = useData();
+  const {user} = useAuth();
+  const {addRestaurant, error, msg} = useData();
 
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   // const [services, setServices] = useState('Regular');
   const [images, setImages] = useState([]);
-  const [error, setError] = useState(null);
+  const [err, setErr] = useState(null);
 
   const initialData = {
-    name,
-    location,
-    description,
+    name:name,
+    location:location,
+    description:description,
     // services,
-    images,
-    error
+    images:images
   }
 
 
@@ -30,27 +31,31 @@ const UploadForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addRestaurant(initialData);
-    console.log(initialData);
-    
+    if(user){
+      addRestaurant(initialData);
+    }
+      
   }
 
   const changeHandler = (e) => {
     let selected = e.target.files[0];
     console.log(selected);
     setImages(selected);
-      setError('');
+      setErr('');
 
     if(selected && types.includes(selected.type)){
       
     } else {
       setImages(null)
-      setError('Please upload a valid file format jpeg or png')
+      setErr('Please upload a valid file format jpeg or png')
     }
     
   }
   return (
+    
     <StyledForm onSubmit={handleSubmit}>
+      {error && console.log(error.message)}
+      {msg ? <h4>{msg}</h4> : <h4>Message not posted</h4>}
       <FormGroup>
       <label>Name</label>
       <InputField type="text" onChange={(e) => setName(e.target.value)}/>
@@ -73,7 +78,7 @@ const UploadForm = () => {
       <FormGroup>
       <label>Images</label>
       <InputField type="file" onChange={changeHandler}/>
-      {error && <h1>{error}</h1>}
+      {err && <h1>{err}</h1>}
       </FormGroup>
       <StyledButton mt="30px" ht="35px" wt="100%">Submit</StyledButton>
     </StyledForm>

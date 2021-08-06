@@ -9,7 +9,7 @@ const Card = ({data, loading, error}) => {
   return (
     <Container>
       {loading && <Loading />}
-      {error && <h4>Something went wrong...</h4>}
+      {error && <h4>{error.message}</h4>}
       {/* {data && console.log(data)} */}
       {data && data.map((arg) => (
         <StyledContainer key={arg.id}>

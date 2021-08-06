@@ -1,4 +1,5 @@
 import { createContext, useState, useContext} from 'react';
+import useLocalStorage from '../components/hooks/useLocalStorage';
 import axios from 'axios';
 
 export const AuthContext = createContext();
@@ -8,6 +9,7 @@ export const useAuth = () => {
 }
 
 const AuthContextProvider = ({children}) => {
+  const [token, setToken] =  useLocalStorage('token', ''); 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -23,6 +25,7 @@ const AuthContextProvider = ({children}) => {
         password: password
       })
       setUser(res.data)
+      setToken(res.data.jwt)
       setLoading(false)
       
     } catch (err) {
@@ -40,6 +43,7 @@ const AuthContextProvider = ({children}) => {
         password: password
       })
       setUser(res.data)
+      setToken(res.data.jwt)
       setLoading(false)
       
     } catch (err) {
@@ -54,8 +58,9 @@ const AuthContextProvider = ({children}) => {
     loading,
     error,
     user,
+    token,
     registerUser,
-    loginUser
+    loginUser,
   }
   
   return (

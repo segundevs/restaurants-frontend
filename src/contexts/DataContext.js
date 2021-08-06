@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect, useContext} from 'react';
 import axios from 'axios';
+import { useAuth } from './Auth';
 
 export const DataContext = createContext();
 
@@ -10,9 +11,14 @@ export const useData = () => {
 
 
 const DataContextProvider = ({children}) => {
+  const {token} = useAuth();
+
+  
+
   const [loading, setLoading] = useState(false);
   const [restaurants, setRestarants] = useState([]);
   const [error, setError] = useState(null);
+  const [msg, setMsg] = useState('');
 
   useEffect(()=>{
       getRestaurants()
@@ -40,8 +46,9 @@ const DataContextProvider = ({children}) => {
     setLoading(true)
     const postData = async() => {
       await axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/restaurants`, res, {headers: {
-    'Authorization': `Bearer ${process.env.REACT_APP_ADMIN_JWT_SECRET}` 
+    'Authorization': `Bearer ${token}` 
     }})
+    setMsg('Data successfully posted');
     getRestaurants();
     }
     setLoading(false)
@@ -49,6 +56,7 @@ const DataContextProvider = ({children}) => {
   }
 
 const values = {
+  msg,
   loading,
   restaurants,
   error,
