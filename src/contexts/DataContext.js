@@ -51,7 +51,6 @@ const DataContextProvider = ({children}) => {
     'Authorization': `Bearer ${token}` 
     }})
       await axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/upload`, formData, {headers: {
-    'Content-Type': 'multipart/form-data',
     'Authorization': `Bearer ${token}`
       }})
     setMsg('Data successfully posted');
