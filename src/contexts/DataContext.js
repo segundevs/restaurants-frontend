@@ -41,13 +41,19 @@ const DataContextProvider = ({children}) => {
   
 
   //Add a restaurant
-  const addRestaurant = (data) => {
-    const res = JSON.stringify(data)
+  const addRestaurant = (data, image) => {
+    const formData = new FormData()
+    formData.append('file', image)
+
     setLoading(true)
     const postData = async() => {
-      await axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/restaurants`, res, {headers: {
+      await axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/restaurants`, data, {headers: {
     'Authorization': `Bearer ${token}` 
     }})
+      await axios.post(`http://localhost:${process.env.REACT_APP_SERVER_PORT}/upload`, formData, {headers: {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': `Bearer ${token}`
+      }})
     setMsg('Data successfully posted');
     getRestaurants();
     }

@@ -19,11 +19,9 @@ const UploadForm = () => {
   const [err, setErr] = useState(null);
 
   const initialData = {
-    name:name,
-    location:location,
-    description:description,
-    // services,
-    images:images
+    name,
+    location,
+    description
   }
 
 
@@ -32,8 +30,9 @@ const UploadForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(user){
-      addRestaurant(initialData);
+      addRestaurant(initialData, images);
     }
+    console.log(initialData, images)
       
   }
 
